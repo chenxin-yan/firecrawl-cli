@@ -65,7 +65,7 @@ Follow this escalation pattern:
 | Bulk extract a site section | `crawl`               | Need many pages (e.g., all /docs/)                                      |
 | AI-powered data extraction  | `agent`               | Need structured data from complex sites                                 |
 | Interact with a page        | `scrape` + `interact` | Content requires clicks, form fills, pagination, or login               |
-| Download a site to files    | `download`            | Save an entire site as local files                                      |
+| Download a site to files    | `x download`          | Save an entire site as local files                                      |
 | Parse a local file          | `parse`               | File on disk (PDF, DOCX, XLSX, etc.) — not a URL                        |
 | Watch pages for changes     | `monitor`             | Schedule recurring scrapes/crawls, diff against snapshots               |
 

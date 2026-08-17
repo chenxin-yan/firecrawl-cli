@@ -21,27 +21,28 @@ AI-powered autonomous extraction. The agent navigates sites and extracts structu
 
 ```bash
 # Extract structured data
-firecrawl agent "extract all pricing tiers" --wait -o .firecrawl/pricing.json
+firecrawl agent "extract all pricing tiers" --wait --json -o .firecrawl/pricing.json
 
 # With a JSON schema for structured output
-firecrawl agent "extract products" --schema '{"type":"object","properties":{"name":{"type":"string"},"price":{"type":"number"}}}' --wait -o .firecrawl/products.json
+firecrawl agent "extract products" --schema '{"type":"object","properties":{"name":{"type":"string"},"price":{"type":"number"}}}' --wait --json -o .firecrawl/products.json
 
 # Focus on specific pages
-firecrawl agent "get feature list" --urls "<url>" --wait -o .firecrawl/features.json
+firecrawl agent "get feature list" --urls "<url>" --wait --json -o .firecrawl/features.json
 ```
 
 ## Options
 
-| Option                 | Description                               |
-| ---------------------- | ----------------------------------------- |
-| `--urls <urls>`        | Starting URLs for the agent               |
-| `--model <model>`      | Model to use: spark-1-mini or spark-1-pro |
-| `--schema <json>`      | JSON schema for structured output         |
-| `--schema-file <path>` | Path to JSON schema file                  |
-| `--max-credits <n>`    | Credit limit for this agent run           |
-| `--wait`               | Wait for agent to complete                |
-| `--pretty`             | Pretty print JSON output                  |
-| `-o, --output <path>`  | Output file path                          |
+| Option                 | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| `--urls <urls>`        | Starting URLs for the agent                           |
+| `--model <model>`      | Model to use: spark-1-mini or spark-1-pro             |
+| `--schema <json>`      | JSON schema for structured output                     |
+| `--schema-file <path>` | Path to JSON schema file                              |
+| `--max-credits <n>`    | Credit limit for this agent run                       |
+| `--wait`               | Wait for agent to complete                            |
+| `--json`               | Output as JSON                                        |
+| `--pretty`             | Pretty print JSON (`--wait` results require `--json`) |
+| `-o, --output <path>`  | Output file path                                      |
 
 ## Tips
 

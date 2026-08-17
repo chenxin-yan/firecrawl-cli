@@ -45,7 +45,7 @@ firecrawl scrape "https://example.com/pricing" --query "What is the enterprise p
 | ------------------------ | ---------------------------------------------------------------- |
 | `-f, --format <formats>` | Output formats: markdown, html, rawHtml, links, screenshot, json |
 | `-Q, --query <prompt>`   | Ask a question about the page content (5 credits)                |
-| `-H`                     | Include HTTP headers in output                                   |
+| `-H, --html`             | Output raw HTML (shortcut for `--format html`)                    |
 | `--only-main-content`    | Strip nav, footer, sidebar — main content only                   |
 | `--wait-for <ms>`        | Wait for JS rendering before scraping                            |
 | `--include-tags <tags>`  | Only include these HTML tags                                     |
