@@ -11,6 +11,8 @@ allowed-tools:
 
 > **Experimental.** Convenience command that combines `map` + `scrape` to save an entire site as local files.
 
+**Prerequisite:** `download` requires authentication (no keyless free tier); without credentials the CLI prompts an interactive login.
+
 Maps the site first to discover pages, then scrapes each one into nested directories under `.firecrawl/`. All scrape options work with download. Always pass `-y` to skip the confirmation prompt.
 
 ## When to use

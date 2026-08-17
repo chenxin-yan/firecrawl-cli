@@ -135,7 +135,7 @@ firecrawl monitor update <monitorId> --state paused
 firecrawl monitor delete <monitorId>
 ```
 
-Schedules accept cron (`--cron "*/5 * * * *"`) or natural language (`--schedule "every 5 minutes"`). Minimum interval is 5 minutes. Targets are `--page <url>` for one page, `--scrape-urls a,b,c` for multiple scrape URLs, or `--crawl-url <url>` for a whole-site crawl each check. Use `--goal` for flag-based monitor creation, or include `"goal": "..."` in JSON payloads. Note: `--state` (not `--status`) sets active/paused; `--page-status` (not `--status`) filters page results on `check` — avoids collision with the global `--status` flag. Monitoring is not available for zero-data-retention teams.
+Schedules accept cron (`--cron "*/5 * * * *"`) or natural language (`--schedule "every 5 minutes"`). Minimum interval is 5 minutes. Targets are `--page <url>` for one page, `--scrape-urls a,b,c` for multiple scrape URLs, `--crawl-url <url>` for a whole-site crawl each check, or `--queries <q,...>` plus required `--goal` for web-search monitors; tune web search with `--search-window` and `--max-results`. Use `--goal` for flag-based monitor creation, or include `"goal": "..."` in JSON payloads. Note: `--state` (not `--status`) sets active/paused; `--page-status` (not `--status`) filters page results on `check` — avoids collision with the global `--status` flag. Monitoring is not available for zero-data-retention teams.
 
 **JSON-mode change tracking:** By default monitors diff each page's markdown and you get a unified text diff back. When you care about **specific structured fields** (price, headline, in-stock flag, items in a list) instead of the whole page, add a `changeTracking` format with `modes: ["json"]` and a JSON schema to the target's `scrapeOptions.formats`. The flag-based form doesn't cover this — pass a JSON body via file or stdin:
 
@@ -316,6 +316,8 @@ wait
 For interact, scrape multiple pages and interact with each independently using their scrape IDs.
 
 ## Credit Usage
+
+Requires authentication (no keyless free tier); without credentials the CLI prompts an interactive login.
 
 ```bash
 firecrawl credit-usage

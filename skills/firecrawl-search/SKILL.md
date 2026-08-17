@@ -16,7 +16,7 @@ Web search with optional content scraping. Returns search results as JSON, optio
 - You don't have a specific URL yet
 - You need to find pages, answer questions, or discover sources
 - You need research papers — see [Paper search](#paper-search), which routes to `firecrawl research`, not to `search --categories research`
-- First step in the [workflow escalation pattern](firecrawl-cli): search → scrape → map → crawl → interact
+- First step in the [workflow escalation pattern](firecrawl-cli): search → scrape → map + scrape → crawl → monitor → interact
 
 ## Quick start
 
