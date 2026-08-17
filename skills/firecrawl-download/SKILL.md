@@ -11,7 +11,7 @@ allowed-tools:
 
 > **Experimental.** `download` is available under the `firecrawl x` command group.
 
-Maps the site first to discover pages, then scrapes each one into nested directories under `.firecrawl/`. All scrape options work with download. Always pass `-y` to skip the confirmation prompt.
+Maps the site first to discover pages, then scrapes each one into nested directories under `.firecrawl/`. Supported scrape options are listed below. Always pass `-y` to skip the confirmation prompt.
 
 ## When to use
 
@@ -33,10 +33,10 @@ firecrawl x download https://docs.example.com --format markdown,links --screensh
 # Creates per page: index.md + links.txt + screenshot.png
 
 # Filter to specific sections
-firecrawl x download https://docs.example.com --include-paths "/features,/sdks"
+firecrawl x download https://docs.example.com --include-paths "/features,/sdks" -y
 
 # Skip translations
-firecrawl x download https://docs.example.com --exclude-paths "/zh,/ja,/fr,/es,/pt-BR"
+firecrawl x download https://docs.example.com --exclude-paths "/zh,/ja,/fr,/es,/pt-BR" -y
 
 # Full combo
 firecrawl x download https://docs.example.com \

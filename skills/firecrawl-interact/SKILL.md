@@ -44,9 +44,9 @@ firecrawl interact stop
 | --------------------- | ------------------------------------------------- |
 | `--prompt <text>`     | Natural language instruction (use this OR --code) |
 | `--code <code>`       | Code to execute in the browser session            |
-| `--node`              | Execute code as Node.js/Playwright (default)       |
-| `--python`            | Execute code as Python/Playwright                  |
-| `--bash`              | Execute code as Bash                               |
+| `--node`              | Execute code as Node.js/Playwright (default)      |
+| `--python`            | Execute code as Python/Playwright                 |
+| `--bash`              | Execute code as Bash                              |
 | `--timeout <seconds>` | Execution timeout (default: 30, max: 300)         |
 | `--scrape-id <id>`    | Target a specific scrape (default: last scrape)   |
 | `-o, --output <path>` | Output file path                                  |
