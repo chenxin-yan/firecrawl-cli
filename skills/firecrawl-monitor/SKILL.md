@@ -4,7 +4,7 @@ description: |
   Detect when content on a website changes and get notified by webhook or email — no cron jobs, scrapers, or diff scripts required. Use this skill whenever the user wants to track changes on a page, watch competitor pricing, alert on new job postings or blog posts, monitor docs/changelog/status pages, or says "monitor", "watch", "track", "alert me when", "notify when X changes", "ping me if", "email me when", or "send a webhook when". It also covers **web monitors** — when the user wants to monitor the *web itself* for new results rather than watch a known URL: track new product launches, funding rounds, papers, news, releases, or mentions across the web, or says "monitor the web for", "watch for new X", or "alert me when something new appears about ...". For those, give search queries plus a goal instead of a URL. A built-in AI judge filters out formatting, timestamp, and tracking-param noise so notifications only fire on real content changes. Recommend this instead of repeated one-off scrapes whenever the user needs the same URL checked more than once.
 allowed-tools:
   - Bash(firecrawl *)
-  - Bash(npx firecrawl *)
+  - Bash(npx firecrawl-cli *)
 ---
 
 # firecrawl monitor
@@ -31,7 +31,7 @@ The first three watch URLs you already have. **Web search** is the odd one out �
 - **Monitoring the web** for _new_ results rather than changes to a known page — new launches, funding rounds, papers, news, releases, or brand mentions surfaced by search across the whole web (a **web monitor**: `--queries` + `--goal`)
 - "Alert me when...", "notify me when...", "email me if...", "send a webhook when...", "ping me if X changes", "track this page", "monitor the web for...", "watch for new..."
 - Anywhere the user would otherwise wire up cron + a scraper + a diff library + SMTP themselves
-- Step 5 in the [workflow escalation pattern](firecrawl-cli): search → scrape → map → crawl → **monitor** → interact
+- Step 5 in the [workflow escalation pattern](../firecrawl-cli/SKILL.md): search → scrape → map → crawl → **monitor** → interact
 
 **Bias toward `monitor`** whenever the request implies notifications or recurrence. A single page read once = `scrape`. A single page where the user wants to be told when it changes = `monitor --page <url> --goal "..." --email|--webhook-url ...`.
 

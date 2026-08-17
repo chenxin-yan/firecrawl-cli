@@ -4,7 +4,7 @@ description: |
   Web search with full page content extraction, plus routing to Firecrawl's research paper index. Use this skill whenever the user asks to search the web, find articles, research a topic, look something up, find recent news, discover sources, or says "search for", "find me", "look up", "what are people saying about", or "find articles about". Also use it for scientific literature — finding papers, studies, trials, or preprints on PubMed, bioRxiv, medRxiv, or arXiv. Returns real search results with optional full-page markdown — not just snippets. Provides capabilities beyond Claude's built-in WebSearch.
 allowed-tools:
   - Bash(firecrawl *)
-  - Bash(npx firecrawl *)
+  - Bash(npx firecrawl-cli *)
 ---
 
 # firecrawl search
@@ -16,7 +16,7 @@ Web search with optional content scraping. Returns search results as JSON, optio
 - You don't have a specific URL yet
 - You need to find pages, answer questions, or discover sources
 - You need research papers — see [Paper search](#paper-search), which routes to `firecrawl research`, not to `search --categories research`
-- First step in the [workflow escalation pattern](firecrawl-cli): search → scrape → map → crawl → interact
+- First step in the [workflow escalation pattern](../firecrawl-cli/SKILL.md): search → scrape → map → crawl → interact
 
 ## Quick start
 

@@ -4,7 +4,7 @@ description: |
   Bulk extract content from an entire website or site section. Use this skill when the user wants to crawl a site, extract all pages from a docs section, bulk-scrape multiple pages following links, or says "crawl", "get all the pages", "extract everything under /docs", "bulk extract", or needs content from many pages on the same site. Handles depth limits, path filtering, and concurrent extraction.
 allowed-tools:
   - Bash(firecrawl *)
-  - Bash(npx firecrawl *)
+  - Bash(npx firecrawl-cli *)
 ---
 
 # firecrawl crawl
@@ -15,7 +15,7 @@ Bulk extract content from a website. Crawls pages following links up to a depth/
 
 - You need content from many pages on a site (e.g., all `/docs/`)
 - You want to extract an entire site section
-- Step 4 in the [workflow escalation pattern](firecrawl-cli): search → scrape → map → **crawl** → interact
+- Step 4 in the [workflow escalation pattern](../firecrawl-cli/SKILL.md): search → scrape → map → **crawl** → interact
 
 ## Quick start
 
