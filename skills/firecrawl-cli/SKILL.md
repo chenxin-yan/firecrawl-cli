@@ -20,7 +20,7 @@ If the task is to integrate Firecrawl into an application, add `FIRECRAWL_API_KE
 Must be installed. Check with `firecrawl --status`.
 
 ```
-  🔥 firecrawl cli v1.8.0
+  🔥 firecrawl cli
 
   ● Authenticated via FIRECRAWL_API_KEY
   Concurrency: 0/100 jobs (parallel scrape limit)
@@ -194,9 +194,7 @@ The `check` response then carries a per-field diff (paths like `plans[0].price`)
   },
   "snapshot": {
     "json": {
-      "plans": [
-        /* current full extraction */
-      ]
+      "plans": [/* current full extraction */]
     }
   }
 }
