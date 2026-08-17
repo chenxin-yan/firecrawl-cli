@@ -57,7 +57,7 @@ firecrawl scrape "https://example.com/pricing" --query "What is the enterprise p
 
 - **Prefer plain scrape over `--query`.** Scrape to a file, then use `grep`, `head`, or read the markdown directly — you can search and reason over the full content yourself. Use `--query` only when you want a single targeted answer without saving the page (costs 5 extra credits).
 - **Try scrape before interact.** Scrape handles static pages and JS-rendered SPAs. Only escalate to `interact` when you need interaction (clicks, form fills, pagination).
-- Multiple URLs are scraped concurrently — check `firecrawl --status` for your concurrency limit. This mode only saves usable markdown; other formats are JSON-stringified into `.md` files, and `-o` is ignored.
+- Multiple URLs are scraped concurrently — check `firecrawl --status` for your concurrency limit. This mode only saves markdown; if markdown isn't requested, the whole response is JSON-stringified into the `.md` file (other formats are otherwise dropped), and `-o` is ignored.
 - Single format outputs raw content. Multiple formats (e.g., `--format markdown,links`) output JSON.
 - Always quote URLs — shell interprets `?` and `&` as special characters.
 - Naming convention: `.firecrawl/{site}-{path}.md`
