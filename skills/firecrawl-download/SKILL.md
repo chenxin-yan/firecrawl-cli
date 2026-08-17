@@ -11,7 +11,7 @@ allowed-tools:
 
 > **Experimental.** Convenience command that combines `map` + `scrape` to save an entire site as local files.
 
-Maps the site first to discover pages, then scrapes each one into nested directories under `.firecrawl/`. All scrape options work with download. Always pass `-y` to skip the confirmation prompt.
+Maps the site origin first to discover pages, then scrapes each one into nested directories under `.firecrawl/`. Use `--include-paths` to scope a non-root URL to one section. Always pass `-y` to skip the confirmation prompt.
 
 ## When to use
 
@@ -33,10 +33,10 @@ firecrawl download https://docs.example.com --format markdown,links --screenshot
 # Creates per page: index.md + links.txt + screenshot.png
 
 # Filter to specific sections
-firecrawl download https://docs.example.com --include-paths "/features,/sdks"
+firecrawl download https://docs.example.com --include-paths "/features,/sdks" -y
 
 # Skip translations
-firecrawl download https://docs.example.com --exclude-paths "/zh,/ja,/fr,/es,/pt-BR"
+firecrawl download https://docs.example.com --exclude-paths "/zh,/ja,/fr,/es,/pt-BR" -y
 
 # Full combo
 firecrawl download https://docs.example.com \
@@ -58,7 +58,9 @@ firecrawl download https://docs.example.com \
 | `--allow-subdomains`      | Include subdomain pages                                  |
 | `-y`                      | Skip confirmation prompt (always use in automated flows) |
 
-## Scrape options (all work with download)
+## Supported scrape options
+
+Only the options listed below are supported:
 
 `-f <formats>`, `-H`, `-S`, `--screenshot`, `--full-page-screenshot`, `--only-main-content`, `--include-tags`, `--exclude-tags`, `--wait-for`, `--max-age`, `--country`, `--languages`
 

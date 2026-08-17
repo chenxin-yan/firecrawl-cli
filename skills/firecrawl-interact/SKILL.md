@@ -25,14 +25,17 @@ Interact with scraped pages in a live browser session. Scrape a page first, then
 # 1. Scrape a page (scrape ID is saved automatically)
 firecrawl scrape "<url>"
 
-# 2. Interact with the page using natural language
-firecrawl interact --prompt "Click the login button"
-firecrawl interact --prompt "Fill in the email field with test@example.com"
-firecrawl interact --prompt "Extract the pricing table"
+# 2. Interact with the page using a positional prompt
+firecrawl interact "Click the login button"
+firecrawl interact "Fill in the email field with test@example.com"
+firecrawl interact "Extract the pricing table"
+
+# A UUID first argument is auto-detected as the scrape ID
+firecrawl interact "<scrape-id>" "Extract the pricing table"
 
 # 3. Or use code for precise control
-firecrawl interact --code "agent-browser click @e5" --language bash
-firecrawl interact --code "agent-browser snapshot -i" --language bash
+firecrawl interact --code "click @e5" --bash
+firecrawl interact --code "snapshot -i" --bash
 
 # 4. Stop the session when done
 firecrawl interact stop
@@ -72,7 +75,7 @@ firecrawl scrape "https://app.example.com" --profile my-app --no-save-changes
 ## Tips
 
 - Always scrape first — `interact` requires a scrape ID from a previous `firecrawl scrape` call
-- The scrape ID is saved automatically, so you don't need `--scrape-id` for subsequent interact calls
+- The scrape ID is saved automatically, so you don't need `--scrape-id` for subsequent interact calls. Saved sessions may expire after about 10 minutes; re-scrape if the CLI warns that the session is stale
 - Use `firecrawl interact stop` to free resources when done
 - For parallel work, scrape multiple pages and interact with each using `--scrape-id`
 
