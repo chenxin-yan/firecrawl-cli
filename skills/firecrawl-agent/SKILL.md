@@ -64,7 +64,7 @@ firecrawl agent "<job-id>" --cancel
 
 ## Tips
 
-- Always use `--wait` to get results inline. Without it, returns a job ID.
+- Use `--wait` for inline results; without it you get a job ID (see [Job IDs](#job-ids)).
 - Use `--schema` for predictable, structured output — otherwise the agent returns freeform data.
 - Agent runs consume more credits than simple scrapes. Use `--max-credits` to cap spending.
 - For simple single-page extraction, prefer `scrape` — it's faster and cheaper.

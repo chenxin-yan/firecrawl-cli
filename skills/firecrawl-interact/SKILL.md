@@ -43,14 +43,14 @@ firecrawl interact stop
 
 ## Options
 
-| Option                | Description                                       |
-| --------------------- | ------------------------------------------------- |
-| `--prompt <text>`     | Natural language instruction (use this OR --code) |
-| `--code <code>`       | Code to execute in the browser session            |
-| `--language <lang>`   | Language for code: bash, python, node             |
-| `--timeout <seconds>` | Execution timeout (default: 30, max: 300)         |
-| `--scrape-id <id>`    | Target a specific scrape (default: last scrape)   |
-| `-o, --output <path>` | Output file path                                  |
+| Option                           | Description                                       |
+| -------------------------------- | ------------------------------------------------- |
+| `--prompt <text>`                | Natural language instruction (use this OR --code) |
+| `--code <code>`                  | Code to execute in the browser session            |
+| `--node` / `--python` / `--bash` | Language for `--code` (default: node)             |
+| `--timeout <seconds>`            | Execution timeout (default: 30, max: 300)         |
+| `--scrape-id <id>`               | Target a specific scrape (default: last scrape)   |
+| `-o, --output <path>`            | Output file path                                  |
 
 ## Profiles
 

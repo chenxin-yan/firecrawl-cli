@@ -135,13 +135,13 @@ Search costs 2 credits. After you've actually used the results (or decided they 
 - **Idempotent:** re-submitting for the same search id returns success but no extra refund.
 - **`--silent &`** is the right pattern — exit code 0 even on failure, so a rejected/expired call never crashes your pipeline.
 
-Verify the search returned results before reading its `id`. Zero-result searches do not write the output file, so never send feedback from a missing or stale file.
+Verify the search returned results before reading its `id`. Zero-result searches write no output file, so the file may be missing — or left over from an earlier search. Only send feedback when this guard succeeds:
 
 ```bash
 SEARCH_ID=$(jq -er 'select(any(.data[]; length > 0)) | .id' .firecrawl/search-react-hooks.json)
 ```
 
-Then send feedback. Pick the rating that matches what actually happened:
+If the guard fails (non-zero exit: missing file or zero results), skip feedback. Otherwise pick the rating that matches what actually happened:
 
 ```bash
 # Results were useful, with notes on what was still missing
