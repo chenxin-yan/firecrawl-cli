@@ -13,12 +13,6 @@ Discover URLs on a site. Use `--search` to find a specific page within a large s
 
 **Prerequisite:** `map` requires authentication (no keyless free tier); without credentials the CLI prompts an interactive login.
 
-## When to use
-
-- You need to find a specific subpage on a large site
-- You want a list of all URLs on a site before scraping or crawling
-- Step 3 in the [workflow escalation pattern](../firecrawl/SKILL.md): search → scrape → **map** + scrape → crawl → monitor → interact
-
 ## Quick start
 
 ```bash
@@ -29,16 +23,9 @@ firecrawl map "<url>" --search "authentication" -o .firecrawl/filtered.txt
 firecrawl map "<url>" --limit 500 --json -o .firecrawl/urls.json
 ```
 
-## Options
+Run `firecrawl map --help` for the full option list (sitemap handling, subdomains, etc.).
 
-| Option                            | Description                  |
-| --------------------------------- | ---------------------------- |
-| `--limit <n>`                     | Max number of URLs to return |
-| `--search <query>`                | Filter URLs by search query  |
-| `--sitemap <include\|skip\|only>` | Sitemap handling strategy    |
-| `--include-subdomains`            | Include subdomain URLs       |
-| `--json`                          | Output as JSON               |
-| `-o, --output <path>`             | Output file path             |
+**Done when:** the URL list is saved under `.firecrawl/` and you have selected the URLs to scrape or crawl next.
 
 ## Tips
 

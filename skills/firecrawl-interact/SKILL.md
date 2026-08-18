@@ -9,15 +9,7 @@ allowed-tools:
 
 # firecrawl interact
 
-Interact with scraped pages in a live browser session. Scrape a page first, then use natural language prompts or code to click, fill forms, navigate, and extract data.
-
-## When to use
-
-- Content requires interaction: clicks, form fills, pagination, login
-- `scrape` failed because content is behind JavaScript interaction
-- You need to navigate a multi-step flow
-- Last resort in the [workflow escalation pattern](../firecrawl/SKILL.md): search → scrape → map + scrape → crawl → monitor → **interact**
-- **Never use interact for web searches** — use `search` instead
+Interact with scraped pages in a live browser session. Scrape a page first, then use natural language prompts or code to click, fill forms, navigate, and extract data. For web searches, use `search` — interact is for acting on a specific page.
 
 ## Quick start
 
@@ -41,16 +33,9 @@ firecrawl interact --code "agent-browser snapshot -i" --bash
 firecrawl interact stop
 ```
 
-## Options
+Run `firecrawl interact --help` for the full option list.
 
-| Option                           | Description                                       |
-| -------------------------------- | ------------------------------------------------- |
-| `--prompt <text>`                | Natural language instruction (use this OR --code) |
-| `--code <code>`                  | Code to execute in the browser session            |
-| `--node` / `--python` / `--bash` | Language for `--code` (default: node)             |
-| `--timeout <seconds>`            | Execution timeout (default: 30, max: 300)         |
-| `--scrape-id <id>`               | Target a specific scrape (default: last scrape)   |
-| `-o, --output <path>`            | Output file path                                  |
+**Done when:** the requested content or action result is captured and the session is stopped with `firecrawl interact stop`.
 
 ## Profiles
 
@@ -75,12 +60,12 @@ firecrawl scrape "https://app.example.com" --profile my-app --no-save-changes
 ## Tips
 
 - Always scrape first — `interact` requires a scrape ID from a previous `firecrawl scrape` call
-- The scrape ID is saved automatically, so you don't need `--scrape-id` for subsequent interact calls. Saved sessions may expire after about 10 minutes; re-scrape if the CLI warns that the session is stale
+- The scrape ID is saved automatically, so you can omit `--scrape-id` for subsequent interact calls. Saved sessions may expire after about 10 minutes; re-scrape if the CLI warns that the session is stale
 - Use `firecrawl interact stop` to free resources when done
 - For parallel work, scrape multiple pages and interact with each using `--scrape-id`
 
 ## See also
 
 - [firecrawl-scrape](../firecrawl-scrape/SKILL.md) — try scrape first, escalate to interact only when needed
-- [firecrawl-search](../firecrawl-search/SKILL.md) — for web searches (never use interact for searching)
+- [firecrawl-search](../firecrawl-search/SKILL.md) — use `search` for web searches
 - [firecrawl-agent](../firecrawl-agent/SKILL.md) — AI-powered extraction (less manual control)

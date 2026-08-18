@@ -28,38 +28,40 @@ Follow this escalation pattern:
 5. **Monitor** - Need recurring checks or ongoing alerts. Prefer setting a monitor with `--page` plus `--goal` instead of doing repeated one-off scrapes.
 6. **Interact** - Scrape first, then interact with the page (pagination, modals, form submissions, multi-step navigation).
 
-| Need                        | Command               | When                                                                    |
-| --------------------------- | --------------------- | ----------------------------------------------------------------------- |
-| Find pages on a topic       | `search`              | No specific URL yet                                                     |
-| Find research papers        | `research`            | Biomedical/clinical/scientific literature — never scrape PubMed by hand |
-| Get a page's content        | `scrape`              | Have a URL, page is static or JS-rendered                               |
-| Find URLs within a site     | `map`                 | Need to locate a specific subpage                                       |
-| Bulk extract a site section | `crawl`               | Need many pages (e.g., all /docs/)                                      |
-| AI-powered data extraction  | `agent`               | Need structured data from complex sites                                 |
-| Interact with a page        | `scrape` + `interact` | Content requires clicks, form fills, pagination, or login               |
-| Download a site to files    | `x download`          | Save an entire site as local files                                      |
-| Parse a local file          | `parse`               | File on disk (PDF, DOCX, XLSX, etc.) — not a URL                        |
-| Watch pages for changes     | `monitor`             | Schedule recurring scrapes/crawls, diff against snapshots               |
+| Need                        | Command               | When                                                            |
+| --------------------------- | --------------------- | --------------------------------------------------------------- |
+| Find pages on a topic       | `search`              | No specific URL yet                                             |
+| Find research papers        | `research`            | Biomedical/clinical/scientific literature — use the paper index |
+| Get a page's content        | `scrape`              | Have a URL, page is static or JS-rendered                       |
+| Find URLs within a site     | `map`                 | Need to locate a specific subpage                               |
+| Bulk extract a site section | `crawl`               | Need many pages (e.g., all /docs/)                              |
+| AI-powered data extraction  | `agent`               | Need structured data from complex sites                         |
+| Interact with a page        | `scrape` + `interact` | Content requires clicks, form fills, pagination, or login       |
+| Download a site to files    | `x download`          | Save an entire site as local files                              |
+| Parse a local file          | `parse`               | File on disk (PDF, DOCX, XLSX, etc.) — not a URL                |
+| Watch pages for changes     | `monitor`             | Schedule recurring scrapes/crawls, diff against snapshots       |
 
 For detailed command reference, run `firecrawl <command> --help`.
+
+**Done when:** the narrowest suitable command has completed the request, its output was inspected, and the answer cites the saved source files.
 
 **Scrape vs interact:**
 
 - Use `scrape` first. It handles static pages and JS-rendered SPAs.
 - Use `scrape` + `interact` when you need to interact with a page, such as clicking buttons, filling out forms, navigating through a complex site, infinite scroll, or when scrape fails to grab all the content you need.
-- Never use interact for web searches - use `search` instead.
+- For web searches, use `search` — interact is for acting on a specific page.
 
 **Monitor:** Bias toward `monitor` when the user's goal is ongoing change detection, alerting, or repeated checks over time — not another one-off scrape. Goal writing, schedules, target modes, and JSON-mode change tracking are documented in [firecrawl-monitor](../firecrawl-monitor/SKILL.md).
 
-**Avoid redundant fetches:**
+**Reuse fetched content:**
 
-- `search --scrape` already fetches full page content. Don't re-scrape those URLs.
+- `search --scrape` already fetches full page content. Reuse it instead of re-scraping those URLs.
 - Check `.firecrawl/` for existing data before fetching again.
 
 ## When to Load References
 
 - **Searching the web or finding sources first** -> [firecrawl-search](../firecrawl-search/SKILL.md)
-- **Finding research papers (biomedical, clinical, or scientific literature; PubMed, bioRxiv, medRxiv, arXiv)** -> `firecrawl research search-papers`, documented in [firecrawl-search](../firecrawl-search/SKILL.md). Do not scrape PubMed or Google Scholar by hand, and do not reach for `search --categories research` — that is a website filter, not the paper index.
+- **Finding research papers (biomedical, clinical, or scientific literature; PubMed, bioRxiv, medRxiv, arXiv)** -> `firecrawl research search-papers`, documented in [firecrawl-search](../firecrawl-search/SKILL.md). Use the paper index instead of scraping PubMed or Google Scholar by hand; `search --categories research` is a website filter, not the paper index.
 - **Scraping a known URL** -> [firecrawl-scrape](../firecrawl-scrape/SKILL.md)
 - **Finding URLs on a known site** -> [firecrawl-map](../firecrawl-map/SKILL.md)
 - **Bulk extraction from a docs section or site** -> [firecrawl-crawl](../firecrawl-crawl/SKILL.md)
@@ -90,7 +92,7 @@ Naming conventions:
 .firecrawl/{site}-{path}.md
 ```
 
-Never read entire output files at once. Use `grep`, `head`, or incremental reads:
+Read output files incrementally with `grep`, `head`, or bounded reads:
 
 ```bash
 wc -l .firecrawl/file.md && head -50 .firecrawl/file.md
@@ -116,7 +118,7 @@ firecrawl feedback scrape "$SCRAPE_ID" \
   --silent &
 ```
 
-Keep generic feedback small: issue codes, tags, short notes, URLs, page numbers, and small metadata objects. Do not send raw scrape/parse outputs or full page contents as feedback.
+Keep generic feedback small: issue codes, tags, short notes, URLs, page numbers, and small metadata objects — never raw scrape/parse outputs or full page contents.
 
 **Opt out:** `export FIRECRAWL_NO_ENDPOINT_FEEDBACK=1` makes the CLI skip every endpoint feedback call silently. Respect that flag — do not try to work around it.
 
