@@ -11,12 +11,6 @@ allowed-tools:
 
 Scrape one or more URLs. Returns clean, LLM-optimized markdown. Multiple URLs are scraped concurrently.
 
-## When to use
-
-- You have a specific URL and want its content
-- The page is static or JS-rendered (SPA)
-- Step 2 in the [workflow escalation pattern](../firecrawl/SKILL.md): search → **scrape** → map + scrape → crawl → monitor → interact
-
 ## Quick start
 
 ```bash
@@ -39,24 +33,14 @@ firecrawl scrape "<url>" --format markdown,links -o .firecrawl/page.json
 firecrawl scrape "https://example.com/pricing" --query "What is the enterprise plan price?"
 ```
 
-## Options
+Run `firecrawl scrape --help` for the full option list.
 
-| Option                   | Description                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `-f, --format <formats>` | Output formats: markdown, html, rawHtml, links, images, screenshot, summary, changeTracking, json, attributes, branding |
-| `-Q, --query <prompt>`   | Ask a question about the page content (5 credits)                                                                       |
-| `-H, --html`             | Output raw HTML (shortcut for `--format html`)                                                                          |
-| `--only-main-content`    | Strip nav, footer, sidebar — main content only                                                                          |
-| `--wait-for <ms>`        | Wait for JS rendering before scraping                                                                                   |
-| `--include-tags <tags>`  | Only include these HTML tags                                                                                            |
-| `--exclude-tags <tags>`  | Exclude these HTML tags                                                                                                 |
-| `--redact-pii`           | Redact personally identifiable information from output                                                                  |
-| `-o, --output <path>`    | Output file path                                                                                                        |
+**Done when:** the content is saved under `.firecrawl/` and you have inspected it with bounded reads (`head`, `grep`) to answer the request.
 
 ## Tips
 
 - **Prefer plain scrape over `--query`.** Scrape to a file, then use `grep`, `head`, or read the markdown directly — you can search and reason over the full content yourself. Use `--query` only when you want a single targeted answer without saving the page (costs 5 extra credits).
-- **Try scrape before interact.** Scrape handles static pages and JS-rendered SPAs. Only escalate to `interact` when you need interaction (clicks, form fills, pagination).
+- **Scrape handles static pages and JS-rendered SPAs.** Escalate to `interact` when the page needs interaction (clicks, form fills, pagination) or scrape misses content.
 - Multiple URLs are scraped concurrently — check `firecrawl --status` for your concurrency limit. This mode saves markdown only and ignores `-o`; other requested formats are dropped. If markdown wasn't requested, the whole JSON response is written into the `.md` file.
 - Single format outputs raw content. Multiple formats (e.g., `--format markdown,links`) output JSON.
 - Always quote URLs — shell interprets `?` and `&` as special characters.

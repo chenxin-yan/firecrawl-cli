@@ -11,12 +11,6 @@ allowed-tools:
 
 Turn a local document into clean markdown on disk. Supports **PDF, DOCX, DOC, ODT, RTF, XLSX, XLS, HTML/HTM**.
 
-## When to use
-
-- You have a file on disk (not a URL) and want its text as markdown
-- User drops a PDF/DOCX and asks what it says, or to summarize it
-- Use `scrape` instead when the source is a URL
-
 ## Quick start
 
 Always save to `.firecrawl/` with `-o` — parsed docs can be hundreds of KB and blow up context if streamed to stdout. Add `.firecrawl/` to `.gitignore`.
@@ -35,18 +29,11 @@ firecrawl parse ./paper.pdf -Q "What are the main conclusions?" \
   -o .firecrawl/paper-qa.md
 ```
 
-Then `head`, `grep`, `rg` etc., or incrementally read the file - don't load the whole thing at once.
+Then read the output incrementally with `head`, `grep`, or `rg`.
 
-## Options
+Run `firecrawl parse --help` for the full option list.
 
-| Option                   | Description                                                                                                                      |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `-S, --summary`          | AI-generated summary                                                                                                             |
-| `-Q, --query <prompt>`   | Ask a question about the parsed content                                                                                          |
-| `-o, --output <path>`    | Output file path — **always use this**                                                                                           |
-| `-f, --format <formats>` | Comma-separated: `markdown`, `html`, `rawHtml`, `links`, `images`, `summary`, `json`, `attributes`. Multiple formats output JSON |
-| `--timeout <ms>`         | Timeout for the parse job                                                                                                        |
-| `--timing`               | Show request duration                                                                                                            |
+**Done when:** the markdown, summary, or answer is written under `.firecrawl/` and you have inspected it with bounded reads.
 
 ## Tips
 
