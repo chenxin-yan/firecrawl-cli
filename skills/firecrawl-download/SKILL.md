@@ -1,7 +1,7 @@
 ---
 name: firecrawl-download
 description: |
-  Download an entire website as local files — markdown, screenshots, or multiple formats per page. Use this skill when the user wants to save a site locally, download documentation for offline use, bulk-save pages as files, or says "download the site", "save as local files", "offline copy", "download all the docs", or "save for reference". Combines site mapping and scraping into organized local directories.
+  Save a site or section as local files (markdown, screenshots). Use for "download the site", offline docs, or a local copy for reference.
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)
