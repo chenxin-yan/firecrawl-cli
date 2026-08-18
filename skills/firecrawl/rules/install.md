@@ -48,6 +48,8 @@ First check status:
 firecrawl --status
 ```
 
+`--status` shows auth state, concurrency (max parallel jobs — run parallel operations up to that limit), and remaining API credits.
+
 Then run one small real request to prove install, auth, and output all work:
 
 ```bash
@@ -74,7 +76,7 @@ Ask the user how they'd like to authenticate:
 1. **Login with browser (Recommended)** - Run `firecrawl login --browser`
 2. **Enter API key manually** - Run `firecrawl login --api-key "<key>"` with a key from firecrawl.dev
 
-If you cannot obtain a key and the user cannot sign up, search, scrape, and interact still work without an API key on the keyless free tier (rate-limited). Browser login or an API key remains preferred for the best results. See [agent onboarding](https://www.firecrawl.dev/agent-onboarding/SKILL.md) for the full set of onboarding paths.
+If you cannot obtain a key and the user cannot sign up, search, scrape, and interact still work without an API key on the keyless free tier (rate-limited). Commands that need an account — `crawl`, `map`, `download`, `agent`, `monitor`, `credit-usage`, and the feedback commands — prompt an interactive login when no credentials are set. Browser login or an API key remains preferred for the best results. See [agent onboarding](https://www.firecrawl.dev/agent-onboarding/SKILL.md) for the full set of onboarding paths.
 
 ### Command not found
 

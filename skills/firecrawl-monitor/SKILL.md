@@ -162,7 +162,7 @@ The goal is what the AI change judge uses to decide whether a page is `changed` 
 - Add an `Ignore ...` sentence **only** for intent-specific exclusions (e.g. points/comments for rankings, marketing copy for pricing, general company-page updates for job listings).
 - Do **not** repeat generic noise exclusions — the judge already handles whitespace, casing, punctuation, encoding, formatting-only changes, request/session IDs, cache busters, tracking params, generic metadata noise, and unrelated page chrome.
 - Don't invent page-specific sections, entities, thresholds, exclusions, or business rules unless the user mentioned them.
-- If the user is vague or asks for "any change", keep the goal broad and don't add exclusions.
+- If the user is vague or asks for "any change", keep the goal broad and don't add exclusions. If the user mentions noise they do not care about, include that explicitly.
 
 | User says                   | Good goal                                                                                                                                                             |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -240,7 +240,7 @@ Each changed page in the check response then carries a per-field diff plus a sna
 }
 ```
 
-Use `modes: ["json", "git-diff"]` for **mixed mode** — you get both `diff.json` (per-field) and `diff.text` (markdown sidecar), and the page is marked `changed` whenever either surface changed.
+Use `modes: ["json", "git-diff"]` for **mixed mode** — you get both `diff.json` (per-field) and `diff.text` (markdown sidecar), and the page is marked `changed` whenever either surface changed. For markdown-only monitors, `diff.text` holds the unified diff and `diff.json` is a `parse-diff` AST (`{ files: [...] }`); there is no `snapshot`.
 
 ## Tips
 
