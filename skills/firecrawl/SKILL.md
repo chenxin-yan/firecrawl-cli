@@ -1,7 +1,7 @@
 ---
 name: firecrawl
 description: |
-  Search, scrape, crawl, monitor, or interact with the web via the Firecrawl CLI. Use whenever the task needs live web content: finding sources, extracting a URL, discovering site URLs, bulk extraction, downloading a site, change alerts, or pages needing clicks/login. For web content only — local files route to firecrawl-parse.
+  Any live-web task via the Firecrawl CLI: finding sources, extracting a URL's content, discovering site URLs, bulk extraction, downloading a site, change alerts, or pages needing clicks/login — web only; local files route to firecrawl-parse.
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)
