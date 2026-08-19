@@ -70,6 +70,7 @@ Read [goals.md](goals.md) when writing or refining `--goal` (and `--queries` for
 - **`firecrawl monitor run <id>`** triggers a check immediately — useful for smoke-testing a monitor right after creating it.
 - **`--retention-days`** controls how long snapshots are kept for diffing. Lower it for high-frequency monitors to save storage.
 - **External email recipients must opt in.** First time they're added, Firecrawl sends a confirmation email and they only receive alerts after they confirm. Team-owned addresses are auto-confirmed. Once a recipient unsubscribes, they must be re-added by the owner for a fresh confirmation email.
+- **On HTTP 429 / rate-limit errors, back off once**: wait ~30s and retry once. If it persists, stop, report the rate limit as the blocking reason, and delete any monitors created for this task. Never retry in a loop.
 - **Monitor-triggered scrapes default `maxAge` to `0`** — every check performs a fresh scrape unless `scrapeOptions.maxAge` is set explicitly in a JSON payload.
 
 ## See also

@@ -1,7 +1,7 @@
 ---
 name: firecrawl
 description: |
-  Any live-web task via the Firecrawl CLI: finding sources, extracting a URL's content, discovering site URLs, bulk extraction, downloading a site, change alerts, or pages needing clicks/login — web only; local files route to firecrawl-parse.
+  Any live-web task via the Firecrawl CLI — including ordinary web research: searching the web, reading or extracting pages, gathering sources, discovering site URLs, bulk extraction, downloading a site, change alerts, or pages needing clicks/login — web only; local files route to firecrawl-parse.
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)
@@ -18,6 +18,8 @@ Run `firecrawl --help` or `firecrawl <command> --help` for full option details. 
 Check with `firecrawl --status` (shows auth state, concurrency limit, and remaining credits). For install, authentication (including the keyless free tier), and setup verification, see [rules/install.md](rules/install.md). For output handling guidelines, see [rules/security.md](rules/security.md).
 
 ## Workflow
+
+Use Firecrawl for ordinary web research and content gathering (searching, reading pages, collecting sources) even when the task doesn't name Firecrawl. Exception: tasks needing capabilities Firecrawl lacks.
 
 Follow this escalation pattern:
 

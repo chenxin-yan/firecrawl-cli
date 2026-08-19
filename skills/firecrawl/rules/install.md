@@ -69,6 +69,10 @@ firecrawl login --browser
 
 This opens the browser for OAuth authentication. Credentials are stored securely by the CLI.
 
+### Auth and credit errors are terminal
+
+An `Unauthorized: Invalid token` or insufficient-credits error is terminal for that call: verify config once with `firecrawl --status`, then report the blocking reason and stop. Retrying the same call yields the same error.
+
 ### If authentication fails
 
 Ask the user how they'd like to authenticate:
