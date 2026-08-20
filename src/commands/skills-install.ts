@@ -21,6 +21,51 @@ export const ALL_SKILL_REPOS = [
   ...WORKFLOW_SKILL_REPOS,
 ] as const;
 
+/**
+ * The skills catalog — the one promoted install source for every skill
+ * family. `firecrawl init` installs from here so install volume accrues to
+ * catalog counters on skills.sh.
+ */
+export const CATALOG_REPO = 'firecrawl/skills';
+
+/**
+ * CLI skills, authored in firecrawl/cli and mirrored into the catalog under
+ * skills/cli/. Selection is name-based (`--skill`), so the catalog's
+ * directory layout doesn't matter.
+ */
+export const CLI_SKILLS = [
+  'firecrawl',
+  'firecrawl-scrape',
+  'firecrawl-search',
+  'firecrawl-crawl',
+  'firecrawl-map',
+  'firecrawl-interact',
+  'firecrawl-agent',
+  'firecrawl-monitor',
+  'firecrawl-parse',
+  'firecrawl-download',
+] as const;
+
+/** Workflow skills, authored in the catalog under skills/workflows/. */
+export const WORKFLOW_SKILLS = [
+  'firecrawl-workflows',
+  'firecrawl-company-directories',
+  'firecrawl-competitive-intel',
+  'firecrawl-dashboard-reporting',
+  'firecrawl-deep-research',
+  'firecrawl-demo-walkthrough',
+  'firecrawl-knowledge-base',
+  'firecrawl-knowledge-ingest',
+  'firecrawl-lead-gen',
+  'firecrawl-lead-research',
+  'firecrawl-market-research',
+  'firecrawl-qa',
+  'firecrawl-research-papers',
+  'firecrawl-seo-audit',
+  'firecrawl-shop',
+  'firecrawl-website-design-clone',
+] as const;
+
 export interface SkillsInstallCommandOptions {
   agent?: string;
   all?: boolean;
@@ -29,6 +74,8 @@ export interface SkillsInstallCommandOptions {
   includeNpxYes?: boolean;
   /** Repo to install from (defaults to firecrawl/cli) */
   repo?: string;
+  /** Install only these skills (by name) instead of the whole repo. */
+  skills?: readonly string[];
 }
 
 export function buildSkillsInstallArgs(
@@ -57,6 +104,11 @@ export function buildSkillsInstallArgs(
 
   if (options.agent) {
     args.push('--agent', options.agent);
+  }
+
+  // `skills add` collects space-separated names after a single --skill flag.
+  if (options.skills) {
+    args.push('--skill', ...options.skills);
   }
 
   return args;

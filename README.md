@@ -62,11 +62,18 @@ detected harnesses (all selected by default) so you can pick a subset.
 
 ### Agent skills
 
-The init command installs all Firecrawl agent skill segments into AI coding agents (Cursor, Claude Code, Windsurf, etc.):
+The init command installs the **CLI skills** by default and offers the **workflow skills** as optional extras, into AI coding agents (Cursor, Claude Code, Windsurf, etc.):
 
-- **CLI skills** — teach agents how to use the Firecrawl CLI for live web work (search, scrape, interact, map, crawl, agent)
-- **Build skills** — teach agents how to integrate Firecrawl into application code (choose endpoints, wire SDKs, set up API keys)
-- **Workflow skills** — teach agents how to produce Firecrawl-powered deliverables such as research briefs, SEO audits, QA reports, lead lists, knowledge bases, and design-system extraction
+- **CLI skills** — teach agents how to use the Firecrawl CLI for live web work (search, scrape, interact, map, crawl, agent). Installed by default.
+- **Workflow skills** — teach agents how to produce Firecrawl-powered deliverables such as research briefs, SEO audits, QA reports, lead lists, knowledge bases, and design-system extraction. Interactive multi-select during init.
+
+All skill families live in the [`firecrawl/skills`](https://github.com/firecrawl/skills) catalog — including the **build skills** for integrating Firecrawl into application code:
+
+```bash
+npx skills add firecrawl/skills
+```
+
+> Contributing skills? CLI skills → PR this repo (`skills/`). Build/SDK skills → PR the [`firecrawl`](https://github.com/firecrawl/firecrawl) monorepo (`skills/`). Everything else (workflows, reference) → PR [`firecrawl/skills`](https://github.com/firecrawl/skills).
 
 To reinstall skills manually:
 
@@ -961,9 +968,9 @@ firecrawl x download https://docs.firecrawl.dev --include-paths "/features,/sdks
 
 ### Workflow Skills
 
-The old experimental AI workflow commands have moved to the NPX-installable
-[`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows)
-skills package. Workflow skills infer from the user's request first and only ask
+The old experimental AI workflow commands have moved to the
+[`firecrawl/skills`](https://github.com/firecrawl/skills) catalog
+(`skills/workflows/`). Workflow skills infer from the user's request first and only ask
 short clarifying questions when required inputs are missing. Install them with:
 
 ```bash
