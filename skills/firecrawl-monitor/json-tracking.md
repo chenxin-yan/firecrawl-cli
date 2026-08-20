@@ -61,7 +61,7 @@ Each changed page in the check response then carries a per-field diff plus a sna
   "snapshot": {
     "json": {
       "plans": [
-        /* current full extraction */
+        { "name": "Pro", "price": "$49/mo", "features": ["25 GB storage"] }
       ]
     }
   }

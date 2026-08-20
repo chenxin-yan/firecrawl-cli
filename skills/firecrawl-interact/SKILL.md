@@ -1,7 +1,7 @@
 ---
 name: firecrawl-interact
 description: |
-  Drive a live browser on a scraped page: click, fill forms, log in, paginate, infinite-scroll. Use when content requires interaction or a scrape returned incomplete content.
+  Drive a live browser on a scraped page: click, fill forms, log in, paginate, infinite-scroll. Use when content requires interaction or a scrape failed or returned incomplete content.
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)

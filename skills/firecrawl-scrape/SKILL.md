@@ -35,7 +35,7 @@ firecrawl scrape "https://example.com/pricing" --query "What is the enterprise p
 
 Run `firecrawl scrape --help` for the full option list.
 
-**Done when:** the content is saved under `.firecrawl/` and you have inspected it with bounded reads (`head`, `grep`) to answer the request.
+**Done when:** you have the scraped content — on stdout, in your `-o` file, or under `.firecrawl/` for multi-URL scrapes — and have inspected it with bounded reads (`head`, `grep`) to answer the request.
 
 ## Tips
 
