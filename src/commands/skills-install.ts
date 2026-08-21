@@ -66,6 +66,30 @@ export const WORKFLOW_SKILLS = [
   'firecrawl-website-design-clone',
 ] as const;
 
+/**
+ * A named subset of catalog skills to install. Shared by `init` and
+ * `setup skills`/`setup workflows` so a retry hint always reinstalls exactly
+ * the same set. Selection is name-based and independent of catalog layout.
+ */
+export interface SkillSelection {
+  repo: string;
+  /** Install only these skills (by name); omit for the whole repo. */
+  skills?: readonly string[];
+  label: string;
+}
+
+export const CLI_SKILL_SELECTION: SkillSelection = {
+  repo: CATALOG_REPO,
+  skills: CLI_SKILLS,
+  label: 'core firecrawl skills',
+};
+
+export const WORKFLOW_SKILL_SELECTION: SkillSelection = {
+  repo: CATALOG_REPO,
+  skills: WORKFLOW_SKILLS,
+  label: 'firecrawl workflow skills',
+};
+
 export interface SkillsInstallCommandOptions {
   agent?: string;
   all?: boolean;

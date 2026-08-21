@@ -19,8 +19,10 @@ import { getApiKey } from '../utils/config';
 import {
   buildSkillsInstallArgs,
   cleanNpmEnv,
+  CLI_SKILL_SELECTION,
   SKILL_REPOS,
-  WORKFLOW_SKILL_REPOS,
+  WORKFLOW_SKILL_SELECTION,
+  type SkillSelection,
 } from './skills-install';
 import { hasNpx, installSkillsNative } from './skills-native';
 import {
@@ -284,10 +286,10 @@ export async function handleSetupCommand(
 
   switch (subcommand) {
     case 'skills':
-      await installSkills(options, SKILL_REPOS);
+      await installSkills(options, [CLI_SKILL_SELECTION]);
       break;
     case 'workflows':
-      await installSkills(options, WORKFLOW_SKILL_REPOS);
+      await installSkills(options, [WORKFLOW_SKILL_SELECTION]);
       break;
     case 'mcp':
       await installMcp(options);
@@ -463,18 +465,20 @@ export async function handleMakeDefaultCommand(
 
 async function installSkills(
   options: SetupOptions,
-  repos: readonly string[]
+  selections: readonly SkillSelection[]
 ): Promise<void> {
-  for (const repo of repos) {
+  for (const selection of selections) {
+    const { repo } = selection;
     if (options.nativeSkills) {
       try {
         const result = await installSkillsNative(repo, {
           agent: options.agent,
           quiet: options.quiet,
+          skills: selection.skills,
         });
         if (options.quiet) {
           console.log(
-            `  ${green}✓${reset} ${skillRepoLabel(repo)} ${dim}(${result.skillCount})${reset}`
+            `  ${green}✓${reset} ${selection.label} ${dim}(${result.skillCount})${reset}`
           );
         }
       } catch (error) {
@@ -494,6 +498,7 @@ async function installSkills(
         global: true,
         yes: options.yes,
         includeNpxYes: true,
+        skills: selection.skills,
       });
 
       const cmd = args.join(' ');
@@ -525,9 +530,11 @@ export async function installSkillsForAgent(
   options: SetupOptions = {},
   repos: readonly string[] = SKILL_REPOS
 ): Promise<void> {
+  // Legacy whole-repo path (used by `firecrawl launch`): install each repo
+  // in full, labeled by repo name.
   await installSkills(
     { ...options, agent, global: options.global ?? true },
-    repos
+    repos.map((repo) => ({ repo, label: skillRepoLabel(repo) }))
   );
 }
 

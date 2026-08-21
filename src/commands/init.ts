@@ -10,10 +10,11 @@ import { saveCredentials } from '../utils/credentials';
 import { updateConfig, getApiKey } from '../utils/config';
 import {
   buildSkillsInstallArgs,
-  CATALOG_REPO,
-  CLI_SKILLS,
   cleanNpmEnv,
+  CLI_SKILL_SELECTION,
+  WORKFLOW_SKILL_SELECTION,
   WORKFLOW_SKILLS,
+  type SkillSelection,
 } from './skills-install';
 import {
   hasNpx,
@@ -111,29 +112,21 @@ export const TEMPLATES: TemplateEntry[] = [
 ];
 
 /**
- * A named subset of catalog skills to install. Everything installs from the
- * catalog (CATALOG_REPO) so install volume accrues to catalog counters;
- * selection is name-based and independent of the catalog's directory layout.
+ * Init selections extend the shared catalog selections with a retry hint.
+ * `setup skills`/`setup workflows` install the same selections, so the hint
+ * reinstalls exactly what init attempted.
  */
-interface SkillSelection {
-  repo: string;
-  skills: readonly string[];
-  label: string;
-  /** Retry hint shown when the install fails. */
+interface InitSkillSelection extends SkillSelection {
   retryCommand: string;
 }
 
-const CLI_SKILL_SELECTION: SkillSelection = {
-  repo: CATALOG_REPO,
-  skills: CLI_SKILLS,
-  label: 'core firecrawl skills',
+const INIT_CLI_SELECTION: InitSkillSelection = {
+  ...CLI_SKILL_SELECTION,
   retryCommand: 'firecrawl setup skills',
 };
 
-const WORKFLOW_SKILL_SELECTION: SkillSelection = {
-  repo: CATALOG_REPO,
-  skills: WORKFLOW_SKILLS,
-  label: 'firecrawl workflow skills',
+const INIT_WORKFLOW_SELECTION: InitSkillSelection = {
+  ...WORKFLOW_SKILL_SELECTION,
   retryCommand: 'firecrawl setup workflows',
 };
 
@@ -1058,7 +1051,7 @@ async function runNonInteractive(options: InitOptions): Promise<void> {
     console.log(
       `${stepLabel()} Installing firecrawl skills for AI coding agents...`
     );
-    for (const selection of [CLI_SKILL_SELECTION, WORKFLOW_SKILL_SELECTION]) {
+    for (const selection of [INIT_CLI_SELECTION, INIT_WORKFLOW_SELECTION]) {
       try {
         const count = await installSkillRepoQuiet(selection, options);
         if (count != null) skillCount = (skillCount ?? 0) + count;

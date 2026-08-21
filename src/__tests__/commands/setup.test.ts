@@ -19,7 +19,14 @@ import {
   installOpenClawMcp,
   installSkillsForAgent,
 } from '../../commands/setup';
-import { ALL_SKILL_REPOS } from '../../commands/skills-install';
+import {
+  ALL_SKILL_REPOS,
+  CLI_SKILLS,
+  WORKFLOW_SKILLS,
+} from '../../commands/skills-install';
+
+const cliSkillFlags = `--skill ${CLI_SKILLS.join(' ')}`;
+const workflowSkillFlags = `--skill ${WORKFLOW_SKILLS.join(' ')}`;
 import { configureWebDefaults } from '../../utils/web-defaults';
 import { getApiKey } from '../../utils/config';
 
@@ -56,37 +63,29 @@ describe('handleSetupCommand', () => {
     vi.restoreAllMocks();
   });
 
-  it('installs core and build skills globally across all detected agents by default', async () => {
+  it('installs the CLI skills from the catalog globally across all detected agents by default', async () => {
     await handleSetupCommand('skills', {});
 
     expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/cli --full-depth --global --all',
-      expect.objectContaining({ stdio: 'inherit' })
-    );
-    expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/skills --full-depth --global --all',
+      `npx -y skills add firecrawl/skills --full-depth --global --all ${cliSkillFlags}`,
       expect.objectContaining({ stdio: 'inherit' })
     );
   });
 
-  it('installs core and build skills globally for a specific agent without using --all', async () => {
+  it('installs the CLI skills globally for a specific agent without using --all', async () => {
     await handleSetupCommand('skills', { agent: 'cursor' });
 
     expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/cli --full-depth --global --agent cursor',
-      expect.objectContaining({ stdio: 'inherit' })
-    );
-    expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/skills --full-depth --global --agent cursor',
+      `npx -y skills add firecrawl/skills --full-depth --global --agent cursor ${cliSkillFlags}`,
       expect.objectContaining({ stdio: 'inherit' })
     );
   });
 
-  it('installs workflow skills as a separate setup option', async () => {
+  it('installs workflow skills from the catalog as a separate setup option', async () => {
     await handleSetupCommand('workflows', {});
 
     expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/firecrawl-workflows --full-depth --global --all',
+      `npx -y skills add firecrawl/skills --full-depth --global --all ${workflowSkillFlags}`,
       expect.objectContaining({ stdio: 'inherit' })
     );
   });
@@ -127,11 +126,7 @@ describe('handleSetupCommand', () => {
     await handleSetupCommand(undefined, { yes: true });
 
     expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/cli --full-depth --global --all --yes',
-      expect.objectContaining({ stdio: 'inherit' })
-    );
-    expect(execSync).toHaveBeenCalledWith(
-      'npx -y skills add firecrawl/skills --full-depth --global --all --yes',
+      `npx -y skills add firecrawl/skills --full-depth --global --all --yes ${cliSkillFlags}`,
       expect.objectContaining({ stdio: 'inherit' })
     );
     expect(execFileSync).toHaveBeenCalledWith(
@@ -866,7 +861,7 @@ describe('handleSetupCommand', () => {
       const installCalls = allCalls.filter(([cmd]) =>
         cmd.includes('skills add')
       );
-      expect(installCalls.length).toBe(2);
+      expect(installCalls.length).toBe(1);
       for (const [, opts] of installCalls) {
         expect(opts.env).toBeDefined();
         expect(opts.env!.npm_command).toBeUndefined();
