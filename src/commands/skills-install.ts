@@ -44,6 +44,10 @@ export const CLI_SKILLS = [
   'firecrawl-monitor',
   'firecrawl-parse',
   'firecrawl-download',
+  // Index skills: teach the `firecrawl research` / `firecrawl developer`
+  // CLI commands, so they ship with the CLI set.
+  'firecrawl-research-index',
+  'firecrawl-developer-index',
 ] as const;
 
 /** Workflow skills, authored in the catalog under skills/workflows/. */
