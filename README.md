@@ -73,7 +73,7 @@ All skill families live in the [`firecrawl/skills`](https://github.com/firecrawl
 npx skills add firecrawl/skills
 ```
 
-> Contributing skills? CLI skills → PR this repo (`skills/`). Build/SDK skills → PR the [`firecrawl`](https://github.com/firecrawl/firecrawl) monorepo (`skills/`). Everything else (workflows, reference) → PR [`firecrawl/skills`](https://github.com/firecrawl/skills).
+> Contributing skills? CLI skills (including the research/developer index skills) → PR this repo (`skills/`). Build/SDK skills → PR the [`firecrawl`](https://github.com/firecrawl/firecrawl) monorepo (`skills/`). Workflow skills → PR [`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows). The catalog ([`firecrawl/skills`](https://github.com/firecrawl/skills)) is read-only — never PR it directly.
 
 To reinstall skills manually:
 
