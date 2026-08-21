@@ -72,9 +72,9 @@ detected harnesses (all selected by default) so you can pick a subset.
 
 ### Agent skills
 
-The init command installs the **CLI skills** by default and offers the **workflow skills** as optional extras, into AI coding agents (Cursor, Claude Code, Windsurf, etc.):
+The init command installs the **core skills** by default and offers the **workflow skills** as optional extras, into AI coding agents (Cursor, Claude Code, Windsurf, etc.):
 
-- **CLI skills** — teach agents how to use the Firecrawl CLI for live web work (search, scrape, interact, map, crawl, agent). Installed by default.
+- **Core skills** — teach agents the Firecrawl primitives for live web work (search, scrape, interact, map, crawl, agent), plus the research/developer index skills. Installed by default.
 - **Workflow skills** — teach agents how to produce Firecrawl-powered deliverables such as research briefs, SEO audits, QA reports, lead lists, knowledge bases, and design-system extraction. Interactive multi-select during init.
 
 All skill families live in the [`firecrawl/skills`](https://github.com/firecrawl/skills) catalog — including the **build skills** for integrating Firecrawl into application code:
@@ -83,7 +83,7 @@ All skill families live in the [`firecrawl/skills`](https://github.com/firecrawl
 npx skills add firecrawl/skills
 ```
 
-> Contributing skills? CLI skills (including the research/developer index skills) → PR this repo (`skills/`). Build/SDK skills → PR the [`firecrawl`](https://github.com/firecrawl/firecrawl) monorepo (`skills/`). Workflow skills → PR [`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows). The catalog ([`firecrawl/skills`](https://github.com/firecrawl/skills)) is read-only — never PR it directly.
+> Contributing skills? Core skills (including the research/developer index skills) → PR this repo (`skills/`). Build/SDK skills → PR the [`firecrawl`](https://github.com/firecrawl/firecrawl) monorepo (`skills/`). Workflow skills → PR [`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows). The catalog ([`firecrawl/skills`](https://github.com/firecrawl/skills)) is read-only — never PR it directly.
 
 To reinstall skills manually:
 

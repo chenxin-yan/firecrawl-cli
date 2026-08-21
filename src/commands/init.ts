@@ -533,7 +533,7 @@ async function stepIntegrations(options: InitOptions): Promise<number | null> {
     message: 'Which integrations?',
     choices: [
       {
-        name: 'Skills — install core Firecrawl CLI skills for AI coding agents',
+        name: 'Skills — install core Firecrawl skills for AI coding agents',
         value: 'skills',
         checked: true,
       },
