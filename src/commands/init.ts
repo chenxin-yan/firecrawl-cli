@@ -613,7 +613,7 @@ async function stepIntegrations(options: InitOptions): Promise<number | null> {
           if (count != null) totalSkills = (totalSkills ?? 0) + count;
         } catch {
           console.error(
-            `  ${dim}Run "firecrawl setup workflows" later to retry.${reset}`
+            `  ${dim}Run "firecrawl setup workflows" later to retry (installs all workflow skills).${reset}`
           );
         }
         break;

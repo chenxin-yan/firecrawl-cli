@@ -13,10 +13,10 @@ There is **no fixed recipe**. Read the question, decide what kind it is, and cho
 
 - HTTP: **`GET|POST https://api.firecrawl.dev/v2/search/developer`**
   MCP: **`firecrawl_developer_search(query, k?, skills?)`**
-  CLI: **`firecrawl developer <query> [--limit <n>] [--skills-only]`**
+  CLI: **`firecrawl developer <query> [--limit <n>]`**
   Ranked results over the whole index. Each carries `id` (`issue:owner/repo#123`), `url`, and the **matched passages in markdown**, so tables and code blocks survive. The artifact kind is the `id` prefix: `doc:`, `issue:`, `pull_request:`, or `readme:`.
   The default first move for a developer question. It is the only surface that returns the passages, which is what lets you answer instead of pointing at a page.
-  `k` / `--limit` is 1–100 and defaults to 10. `skills="only"` / `--skills-only` restricts the search to agent-skill files.
+  `k` / `--limit` is 1–100 and defaults to 10. `skills="only"` (HTTP/MCP only) restricts the search to agent-skill files.
   Keyless; send `Authorization: Bearer $FIRECRAWL_API_KEY` for higher rate limits.
 
 - MCP: **`firecrawl_search(query, categories: ["developer"])`**
@@ -48,7 +48,7 @@ Only the HTTP surface takes these. On `GET`, pass `types=issue,pull_request` or 
 - **Version-specific behaviour** → an issue's opening report describes the broken version; its resolution supersedes it. Raise `passages` to see further into the thread, and read the resolution and the linked pull request before answering. Never answer from an opening report alone.
 - **Scoped to one library** → `repos=["owner/name"]` when you know the slug, plus `sources` if you want its docs in the same call. If a scoped search comes back empty, read the echoed `indexed` flag first: `false` means nothing from that repo or source can ever match and no rephrasing will help — drop the scope and search the whole index, or go to the web.
 - **Ecosystem-wide** ("which libraries do X", "who else hit this") → no scope. Use `language` / `topic` / `min_stars` to keep to maintained repositories, accepting that this gives up all `doc` results.
-- **Agent skills and tooling conventions** → `skills="only"` / `--skills-only`.
+- **Agent skills and tooling conventions** → `skills="only"` (HTTP/MCP only).
 - **Comparison, opinion, news, or an unindexed project** → the open web. `firecrawl_search`, then `firecrawl_scrape` whatever deserves a full read. Combining is often right: take the contract from the index and the trade-off from the web.
 
 ## Principles

@@ -11,7 +11,7 @@ Find the research papers that answer a research query. Some questions have a sin
 
 Paper abstracts, with full text reachable per paper. The largest share of the corpus is **biomedical and life-science** literature — **PubMed** journal articles plus **bioRxiv** and **medRxiv** preprints — so clinical, drug, gene, disease, epidemiology, and public-health questions are in scope. **arXiv** preprints cover computer science, physics, and mathematics. Coverage outside those sources is thinner: a paper that exists only behind a publisher paywall or in a niche venue may not be indexed, and the general web tools below are the fallback when it isn't.
 
-There is **no fixed recipe**. Read the query, decide what kind it is, and choose the approach below. Some queries need a single search; others need heavy sturctural/semantic expansion. Don't run machinery a query doesn't call for.
+There is **no fixed recipe**. Read the query, decide what kind it is, and choose the approach below. Some queries need a single search; others need heavy structural/semantic expansion. Don't run machinery a query doesn't call for.
 
 ## The tools, and what each is uniquely good at
 

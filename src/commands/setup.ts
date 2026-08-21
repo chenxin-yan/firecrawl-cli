@@ -514,7 +514,7 @@ async function installSkills(
 
     // Fallback: native install (no npx/Node required)
     try {
-      await installSkillsNative(repo);
+      await installSkillsNative(repo, { skills: selection.skills });
     } catch (error) {
       console.error(
         `Failed to install skills from ${repo}:`,
